@@ -1,0 +1,20 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Npm Package Creator Page
+  </h1>
+</div>
+<div>
+    <h3>pipe filter test</h3>
+{{ comma_test_vale | comma_add}}
+</div>
+<div>
+    <h3>moment pipe test</h3>
+{{ moment_test_data  | moment : 'YYYY-MM-DD HH:mm' }}
+</div>
+
+<div>
+    <h3>count up directive test</h3>
+<span (click)="betAmount=3000"><span appCountUp [endVal]="betAmount" [duration]='0.1'></span> P</span>
+
+</div>
