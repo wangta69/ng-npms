@@ -13,6 +13,7 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+
     "lib": [
       "es2017",
       "dom"
@@ -91,12 +92,6 @@
       ],
       "ng-count-up-js/*": [
         "dist/ng-count-up-js/*"
-      ],
-      "crypto-address-validator": [
-        "dist/crypto-address-validator"
-      ],
-      "crypto-address-validator/*": [
-        "dist/crypto-address-validator/*"
       ]
     }
   }

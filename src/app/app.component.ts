@@ -5,6 +5,7 @@ import { LocalStorageService } from 'ng-storages';
 import { only_number, is_undefined } from 'ng-pipe-filter';
 import { SocketService } from 'ng-node-socket';
 import { NgEasingService } from 'ng-easing';
+import WAValidator from 'wallet-address-validator';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,10 @@ export class AppComponent {
       this.testPipeFilter();
       this.testSocketService();
       this.testEaseService();
+
+      let valid = WAValidator.validate('mwt4yQ89ApycbgaP5dFRcEtRbfzHKCg125', 'btc', 'testnet');
+      console.log('valid');
+      console.log(valid);
   }
 
   testCommonService() {
