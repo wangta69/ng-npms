@@ -43,6 +43,7 @@
 
 /** Evergreen browsers require these. **/
 (window as any).global = window;
+global.Buffer = global.Buffer || require('buffer').Buffer;
 // (window as any).global.Buffer = (window as any).global.Buffer || require('buffer').Buffer;
 // global.Buffer = global.Buffer || require('buffer').Buffer;
 // Used for reflect-metadata in JIT. If you use AOT (and only Angular decorators), you can remove.

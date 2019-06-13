@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { CommonService } from 'ng-functions';
-import { RestHttpClient } from 'ng-rest-http';
-import { LocalStorageService } from 'ng-storages';
-import { only_number, is_undefined } from 'ng-pipe-filter';
-import { SocketService } from 'ng-node-socket';
-import { NgEasingService } from 'ng-easing';
+import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../../projects/ng-functions/src/public_api';
+import { RestHttpClient } from '../../projects/ng-rest-http/src/public_api';
+import { LocalStorageService } from '../../projects/ng-storages/src/public_api';
+// import { only_number, is_undefined } from 'ng-pipe-filter';
+import { only_number, is_undefined } from '../../projects/ng-pipe-filter/src/public_api';
+import { SocketMultiService } from '../../projects/ng-node-socket/src/public_api';
+import { NgEasingService } from '../../projects/ng-easing/src/public_api';
 import WAValidator from 'wallet-address-validator';
 
 @Component({
@@ -12,13 +13,19 @@ import WAValidator from 'wallet-address-validator';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   comma_test_vale = 300000;
   moment_test_data = new Date();
-  constructor(protected commonSvc: CommonService, protected http: RestHttpClient,
-                protected storage: LocalStorageService,
-                protected socket: SocketService,
-                protected easeSvc: NgEasingService) {
+  constructor(
+                private commonSvc: CommonService,
+                private http: RestHttpClient,
+                private storage: LocalStorageService,
+                private socket: SocketMultiService,
+                private easeSvc: NgEasingService
+            ) {
+  }
+
+  ngOnInit() {
       this.testCommonService();
       this.testRestHttpClient();
       this.testLocalStorages();
@@ -26,7 +33,7 @@ export class AppComponent {
       this.testSocketService();
       this.testEaseService();
 
-      let valid = WAValidator.validate('mwt4yQ89ApycbgaP5dFRcEtRbfzHKCg125', 'btc', 'testnet');
+      const valid = WAValidator.validate('mwt4yQ89ApycbgaP5dFRcEtRbfzHKCg125', 'btc', 'testnet');
       console.log('valid');
       console.log(valid);
   }
@@ -76,9 +83,9 @@ export class AppComponent {
 
   testSocketService() {
       console.log(' [ testSocketService ] ============= ');
-      this.socket.init('http://182.162.136.170:50000');
+      this.socket.init('test', 'http://io.chanceball.com');
 
-       this.socket.On('connection').subscribe(obj => {
+       this.socket.On('test', 'connection').subscribe(obj => {
            console.log('connection');
           console.log(obj);
       });
