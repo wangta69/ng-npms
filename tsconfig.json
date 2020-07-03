@@ -1,98 +1,26 @@
-{
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es5",
-    "allowSyntheticDefaultImports": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+/*
+  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
+  It is not intended to be used to perform a compilation.
 
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "paths": {
-      "ng-functions": [
-        "dist/ng-functions"
-      ],
-      "ng-functions/*": [
-        "dist/ng-functions/*"
-      ],
-      "ng-httpClient": [
-        "dist/ng-http-client"
-      ],
-      "ng-httpClient/*": [
-        "dist/ng-http-client/*"
-      ],
-      "ng-rest-http": [
-        "dist/ng-rest-http",
-        "dist/ng-rest-http"
-      ],
-      "ng-rest-http/*": [
-        "dist/ng-rest-http/*",
-        "dist/ng-rest-http/*"
-      ],
-      "ng-amchart": [
-        "dist/ng-amchart"
-      ],
-      "ng-amchart/*": [
-        "dist/ng-amchart/*"
-      ],
-      "ng-moment-pipes": [
-        "dist/ng-moment-pipes"
-      ],
-      "ng-moment-pipes/*": [
-        "dist/ng-moment-pipes/*"
-      ],
-      "ng-node-socket": [
-        "dist/ng-node-socket"
-      ],
-      "ng-node-socket/*": [
-        "dist/ng-node-socket/*"
-      ],
-      "ng-pipe-filter": [
-        "dist/ng-pipe-filter"
-      ],
-      "ng-pipe-filter/*": [
-        "dist/ng-pipe-filter/*"
-      ],
-      "ng-social-login": [
-        "dist/ng-social-login"
-      ],
-      "ng-social-login/*": [
-        "dist/ng-social-login/*"
-      ],
-      "ng-storages": [
-        "dist/ng-storages"
-      ],
-      "ng-storages/*": [
-        "dist/ng-storages/*"
-      ],
-      "ng-easing": [
-        "dist/ng-easing"
-      ],
-      "ng-easing/*": [
-        "dist/ng-easing/*"
-      ],
-      "ng-countUpJs": [
-        "dist/ng-count-up-js"
-      ],
-      "ng-countUpJs/*": [
-        "dist/ng-count-up-js/*"
-      ],
-      "ng-count-up-js": [
-        "dist/ng-count-up-js"
-      ],
-      "ng-count-up-js/*": [
-        "dist/ng-count-up-js/*"
-      ]
+  To learn more about this file see: https://angular.io/config/solution-tsconfig.
+*/
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./e2e/tsconfig.json"
+    },
+    {
+      "path": "./projects/ng-node-socket/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ng-node-socket/tsconfig.spec.json"
     }
-  }
+]
 }
