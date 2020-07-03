@@ -19,6 +19,14 @@
       "ng-node-socket": [
         "dist/ng-node-socket/ng-node-socket",
         "dist/ng-node-socket"
+      ],
+      "ng-moment-pipes": [
+        "dist/ng-moment-pipes/ng-moment-pipes",
+        "dist/ng-moment-pipes"
+      ],
+      "ng-count-up-js": [
+        "dist/ng-count-up-js/ng-count-up-js",
+        "dist/ng-count-up-js"
       ]
     }
   }

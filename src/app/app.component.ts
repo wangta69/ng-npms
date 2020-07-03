@@ -6,7 +6,7 @@ import { SocketMultiService } from 'ng-node-socket';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'newangular';
+  public moment_test_data = new Date();
 
   constructor (
       private socket: SocketMultiService,

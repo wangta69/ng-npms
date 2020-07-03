@@ -1,0 +1,25 @@
+.snackbar-wrap {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    padding: 10px 0px;
+    border-radius: 5px;
+    /* min-width: 20%; */
+    width: 90%;
+    transform-origin: center center;
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    &.success {
+      background: rgb(0, 173, 72);
+    }
+    &.danger {
+      background: rgb(173, 35, 0);
+    }
+    .snackbar-text {
+      text-align: center;
+      font-size: 1.3em;
+      color: white;
+      margin: 0;
+    }
+  }

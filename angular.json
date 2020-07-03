@@ -163,6 +163,86 @@
           }
         }
       }
+    },
+    "ng-moment-pipes": {
+      "projectType": "library",
+      "root": "projects/ng-moment-pipes",
+      "sourceRoot": "projects/ng-moment-pipes/src",
+      "prefix": "enl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-moment-pipes/tsconfig.lib.json",
+            "project": "projects/ng-moment-pipes/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-moment-pipes/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-moment-pipes/src/test.ts",
+            "tsConfig": "projects/ng-moment-pipes/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-moment-pipes/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-moment-pipes/tsconfig.lib.json",
+              "projects/ng-moment-pipes/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ng-count-up-js": {
+      "projectType": "library",
+      "root": "projects/ng-count-up-js",
+      "sourceRoot": "projects/ng-count-up-js/src",
+      "prefix": "enl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-count-up-js/tsconfig.lib.json",
+            "project": "projects/ng-count-up-js/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-count-up-js/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-count-up-js/src/test.ts",
+            "tsConfig": "projects/ng-count-up-js/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-count-up-js/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-count-up-js/tsconfig.lib.json",
+              "projects/ng-count-up-js/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "newangular",

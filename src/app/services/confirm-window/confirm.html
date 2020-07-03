@@ -1,0 +1,13 @@
+<h3 class="title">{{data.title}}</h3>
+
+<div class="row col-lg-12 Content">
+    <p class="subTitle" [innerHTML]="data.sub">
+        <!-- {{data.sub}} -->
+    </p>
+    <!-- <p class="subTitle" *ngIf="data.notice">{{data.notice}}</p> -->
+    <div class="form-group row secondP_btn">
+        <button type="button" class="btn cancel" (click)="cancel()">{{'btn.cancel' | translate}}</button>
+        <button type="button" class="btn participation" (click)="confirm()">{{'btn.confirm' | translate}}</button>
+    </div>
+
+</div>

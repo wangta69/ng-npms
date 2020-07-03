@@ -1,0 +1,43 @@
+h3.title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+div.Content {
+    margin: auto;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    p.subTitle {
+        width: 100%;
+        color: #000;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    div.secondP_btn {
+        border-radius: 5px;
+        margin: 15px auto;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        button {
+            width: 110px;
+            margin: 0 10px;
+            font-size: 13px;
+        }
+
+        button.cancel {
+            background: #737373;
+            color: #fff;
+        }
+
+        button.participation {
+            border: 1px solid #00c4c4;
+            color: #00c4c4;
+        }
+    }
+}

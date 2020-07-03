@@ -29,6 +29,7 @@
       "kebab-case"
     ],
     "eofline": true,
+    "experimentalDecorators": false,
     "import-blacklist": [
       true,
       "rxjs/Rx"
@@ -133,6 +134,9 @@
         "check-typecast"
       ]
     },
+    "trailing-comma": false,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
     "no-conflicting-lifecycle": true,
     "no-host-metadata-property": true,
     "no-input-rename": true,

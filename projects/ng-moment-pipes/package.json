@@ -1,0 +1,30 @@
+{
+  "name": "ng-moment-pipes",
+  "version": "1.1.0",
+  "peerDependencies": {
+    "moment": "^2.27.0"
+  },
+  "description": "Tested for angular10",
+  "main": "karma.conf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangta69/ng-moment-pipes.git"
+  },
+  "keywords": [
+    "moment",
+    "angular",
+    "pipe"
+  ],
+  "author": "pondol",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wangta69/ng-moment-pipes/issues"
+  },
+  "homepage": "https://github.com/wangta69/ng-moment-pipes#readme",
+  "peerDependencies": {
+    "moment": "^2.0.0"
+  }
+}

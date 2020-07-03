@@ -21,6 +21,18 @@
     },
     {
       "path": "./projects/ng-node-socket/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ng-moment-pipes/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ng-moment-pipes/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ng-count-up-js/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ng-count-up-js/tsconfig.spec.json"
     }
 ]
 }
