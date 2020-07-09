@@ -243,6 +243,46 @@
           }
         }
       }
+    },
+    "ng-rest-http": {
+      "projectType": "library",
+      "root": "projects/ng-rest-http",
+      "sourceRoot": "projects/ng-rest-http/src",
+      "prefix": "enl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-rest-http/tsconfig.lib.json",
+            "project": "projects/ng-rest-http/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-rest-http/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-rest-http/src/test.ts",
+            "tsConfig": "projects/ng-rest-http/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-rest-http/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-rest-http/tsconfig.lib.json",
+              "projects/ng-rest-http/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "newangular",

@@ -27,6 +27,10 @@
       "ng-count-up-js": [
         "dist/ng-count-up-js/ng-count-up-js",
         "dist/ng-count-up-js"
+      ],
+      "ng-rest-http": [
+        "dist/ng-rest-http/ng-rest-http",
+        "dist/ng-rest-http"
       ]
     }
   }

@@ -33,6 +33,12 @@
     },
     {
       "path": "./projects/ng-count-up-js/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ng-rest-http/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ng-rest-http/tsconfig.spec.json"
     }
 ]
 }
