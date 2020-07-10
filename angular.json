@@ -283,6 +283,86 @@
           }
         }
       }
+    },
+    "ng-functions": {
+      "projectType": "library",
+      "root": "projects/ng-functions",
+      "sourceRoot": "projects/ng-functions/src",
+      "prefix": "enl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-functions/tsconfig.lib.json",
+            "project": "projects/ng-functions/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-functions/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-functions/src/test.ts",
+            "tsConfig": "projects/ng-functions/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-functions/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-functions/tsconfig.lib.json",
+              "projects/ng-functions/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ng-pipe-filter": {
+      "projectType": "library",
+      "root": "projects/ng-pipe-filter",
+      "sourceRoot": "projects/ng-pipe-filter/src",
+      "prefix": "enl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-pipe-filter/tsconfig.lib.json",
+            "project": "projects/ng-pipe-filter/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-pipe-filter/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-pipe-filter/src/test.ts",
+            "tsConfig": "projects/ng-pipe-filter/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-pipe-filter/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-pipe-filter/tsconfig.lib.json",
+              "projects/ng-pipe-filter/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "newangular",

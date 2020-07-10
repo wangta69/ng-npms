@@ -39,6 +39,18 @@
     },
     {
       "path": "./projects/ng-rest-http/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ng-functions/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ng-functions/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ng-pipe-filter/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ng-pipe-filter/tsconfig.spec.json"
     }
 ]
 }

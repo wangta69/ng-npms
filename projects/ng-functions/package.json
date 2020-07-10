@@ -1,0 +1,26 @@
+{
+  "name": "ng-functions",
+  "version": "6.0.6",
+  "peerDependencies": {
+  },
+  "description": "A collection of commonly used functions for angular",
+  "main": "karma.conf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangta69/ng-functions.git"
+  },
+  "keywords": [
+    "angular",
+    "ng",
+    "functions"
+  ],
+  "author": "pondol",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wangta69/ng-functions/issues"
+  },
+  "homepage": "https://github.com/wangta69/ng-functions#readme"
+}
