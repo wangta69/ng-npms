@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import io from 'socket.io-client';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SocketService {
     private url = 'http://xxx.xxx.xxx.xxx:portNumber';
     private Socket: any;
@@ -27,6 +29,18 @@ export class SocketService {
         }
 
         this.onSubscribes[group][key] = observable;
+    }
+
+    public of(namespace: string): void {
+        this.Socket.of(namespace);
+    }
+
+    public once(eventName: string, callback: (body: any) => void): void {
+        this.Socket.once(eventName, callback);
+    }
+
+    public connect(): void {
+        return this.Socket.connect();
     }
 
     get socket(): any {

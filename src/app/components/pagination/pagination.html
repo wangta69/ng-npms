@@ -1,0 +1,14 @@
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="pageInfo.prev == 0">
+            <a class="page-link"(click)="setPage(pageInfo.prev)">Prev</a>
+        </li>
+
+        <li class="page-item" *ngFor="let page of pageInfo.lists" [class.active]="page == currentPage">
+            <a class="page-link" (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li class="page-item" [class.disabled]="pageInfo.next == 0">
+            <a class="page-link" (click)="setPage(pageInfo.next)">Next</a>
+        </li>
+    </ul>
+</nav>

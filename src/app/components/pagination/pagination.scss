@@ -1,0 +1,18 @@
+:host {
+    ul.pagination {
+        display: flex;
+        padding-left: 0;
+        list-style: none;
+        border-radius: 0.25rem;
+
+        li {
+            font-size: 14px;
+            &.active a{
+                background: #02d0ae;
+                color: #fff;
+                border-color: #dee2e6;
+
+            }
+        }
+    }
+}
