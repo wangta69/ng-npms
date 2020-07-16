@@ -15,7 +15,7 @@ export class TradingviewComponent implements OnInit, OnChanges {
     ngOnInit() {
     }
 
-    private loadTradingView() {
+    private loadTradingView(): void {
         const widget = new TradingView.widget (
             {
                 width: '100%',

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, OnChanges, SimpleChange } from '@angular/core';
 import {
     widget,
     IChartingLibraryWidget,
@@ -9,18 +9,18 @@ import {
     ResolutionString,
     ResolutionBackValues,
     HistoryDepth
-} from '../../assets/charting_library/charting_library.min';
+} from '../../../../assets/charting_library/charting_library.min';
 
-import { TradeHistoryService } from '../services/cryptocompare-tv/trade-history.service';
-import { SocketService } from '../services/cryptocompare-tv/socket.service';
+import { TradeHistoryService } from './trade-history.service';
+import { SocketService } from './socket.service';
 const history: any = {};
 
 @Component({
     selector: 'app-tv-chart-container',
     templateUrl: './tv-chart-container.component.html',
-    styleUrls: ['./tv-chart-container.component.css']
+    styleUrls: ['./tv-chart-container.component.scss']
 })
-export class TvChartContainerComponent implements OnInit, OnDestroy {
+export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
     private _symbol: ChartingLibraryWidgetOptions['symbol'] = 'Coinbase:BTC/USD'; // AAPL
     private _interval: ChartingLibraryWidgetOptions['interval'] = '1'; // D
     // BEWARE: no trailing slash is expected in feed URL
@@ -107,6 +107,10 @@ export class TvChartContainerComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
     //    console.log(Datafeed.getBars());
+
+    }
+
+    private loadTradingView(): void {
         const widgetOptions = {
             // debug: false,
             symbol: this._symbol,
@@ -136,26 +140,6 @@ export class TvChartContainerComponent implements OnInit, OnDestroy {
             }
         };
 
-        // console.log('widgetOptions', widgetOptions);
-        /*
-        const widgetOptions: ChartingLibraryWidgetOptions = {
-            symbol: this._symbol,
-            datafeed: new (window as any).Datafeeds.UDFCompatibleDatafeed(this._datafeedUrl),
-            interval: this._interval,
-            container_id: this._containerId,
-            library_path: this._libraryPath,
-            locale: getLanguageFromURL() || 'en',
-            disabled_features: ['use_localstorage_for_settings'],
-            enabled_features: ['study_templates'],
-            charts_storage_url: this._chartsStorageUrl,
-            charts_storage_api_version: this._chartsStorageApiVersion,
-            client_id: this._clientId,
-            user_id: this._userId,
-            fullscreen: this._fullscreen,
-            autosize: this._autosize,
-        };
-        */
-
         const tvWidget = new widget(widgetOptions);
         this._tvWidget = tvWidget;
 
@@ -174,6 +158,20 @@ export class TvChartContainerComponent implements OnInit, OnDestroy {
                 button.innerHTML = 'Check API';
             });
         });
+    }
+
+    ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+        for (const propName in changes) {
+            if (changes.hasOwnProperty(propName)) {
+                const changedProp = changes[propName];
+                if (propName === 'symbol') {
+                    this.symbol = changedProp.currentValue || 'NONE';
+                    // if (this.symbol) {
+                    this.loadTradingView();
+                    // }
+                }
+            }
+        }
     }
 
     public ngOnDestroy(): void {
