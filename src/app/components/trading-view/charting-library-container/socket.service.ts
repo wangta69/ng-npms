@@ -11,13 +11,13 @@ export class SocketService {
     constructor() {
         this.socket = socketIo(SERVER_URL);
         this.socket.on('connect', () => {
-            console.log('=====Socket connected=======');
+            // console.log('=====Socket connected=======');
         });
         this.socket.on('disconnect', (e: any) => {
-            console.log('=====Socket disconnected:', e + ' =======');
+            // console.log('=====Socket disconnected:', e + ' =======');
         });
         this.socket.on('error', (err: any) => {
-            console.log('====socket error', err + ' =======');
+            // console.log('====socket error', err + ' =======');
         });
         this.socket.on('m', (e: any) => {
             // here we get all events the CryptoCompare connection has subscribed to
@@ -106,7 +106,7 @@ export class SocketService {
     }
 
     // takes symbolInfo object as input and creates the subscription string to send to CryptoCompare
-    private createChannelString(symbolInfo): string {
+    private createChannelString(symbolInfo: any): string {
        const channel = symbolInfo.name.split(/[:/]/);
        const exchange = channel[0] === 'GDAX' ? 'Coinbase' : channel[0];
        const to = channel[2];
@@ -115,7 +115,7 @@ export class SocketService {
        return `0~${exchange}~${from}~${to}`;
   }
 
-    public subscribeBars(symbolInfo, resolution, updateCb, uid: string, resetCache, history): void {
+    public subscribeBars(symbolInfo: any, resolution: string, updateCb, uid: string, resetCache, history): void {
         // alert('SubscribeBars from service');
         this.channelString = this.createChannelString(symbolInfo);
         this.socket.emit('SubAdd', {subs: [this.channelString]});

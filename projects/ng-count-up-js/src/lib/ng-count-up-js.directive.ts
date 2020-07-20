@@ -15,22 +15,22 @@ import { CountUp } from './count-up';
 })
 export class CountUpDirective implements OnChanges {
 
-    countUp: any;
-    options: any;
+    private countUp: any;
+    private options: any;
     // Optional extra configuration, such as easing.
     // @Input('countUp') options: any;
 
     // Optional start value for the count. Defaults to zero.
-    @Input() startVal: number;
+    @Input() private startVal: number;
 
     // the number to count to
-    @Input() endVal: number;
+    @Input() private endVal: number;
 
     // Optional duration of the animation in seconds. Default is 2.
-    @Input() duration: number;
+    @Input() private duration: number;
 
     // Optional number of decimal places. Default is 2.
-    @Input() decimals: number;
+    @Input() private decimals: number;
 
     // Optional flag for specifying whether the element should re-animate when clicked.
     // Default is true.
@@ -49,7 +49,7 @@ export class CountUpDirective implements OnChanges {
 
     constructor(private el: ElementRef) {}
 
-    ngOnChanges(changes: SimpleChanges) {
+    public ngOnChanges(changes: SimpleChanges): void {
         if (changes.endVal && typeof changes.endVal.currentValue !== 'undefined') {
             this.countUp = this.createCountUp();
             this.animate();

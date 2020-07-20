@@ -202,15 +202,15 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
     private loadTradingViewData(): void {
         this.Datafeed = {
             onReady: (cb) => {
-                console.log('Inside on ready');
+                // console.log('Inside on ready');
                 setTimeout(() => cb(this.config), 0);
             },
             searchSymbols: (userInput, exchange, symbolType, onResultReadyCallback) => {
-                console.log('Search Symbols running');
+                // console.log('Search Symbols running');
             },
             resolveSymbol: (symbolName, onSymbolResolvedCallback, onResolveErrorCallback) => {
 
-                console.log('ResolveSymbol running');
+                // console.log('ResolveSymbol running');
 
                 const splitData = symbolName.split(/[:/]/);
 
@@ -244,15 +244,15 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
 
                 setTimeout(() => {
                     onSymbolResolvedCallback(symbolStub);
-                    console.log('Resolved Symbol ', JSON.stringify(symbolStub));
+                    // console.log('Resolved Symbol ', JSON.stringify(symbolStub));
                 }, 0);
             },
             getBars: (symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) => {
-                console.log('getBars method running');
-                console.log('symbolinfo ' + JSON.stringify(symbolInfo) + ' resolution ' + resolution + ' from ' + from + ' to ' + to);
+                // console.log('getBars method running');
+                // console.log('symbolinfo ' + JSON.stringify(symbolInfo) + ' resolution ' + resolution + ' from ' + from + ' to ' + to);
                 // console.log('function args',arguments)
                 // console.log(`Requesting bars between ${new Date(from * 1000).toISOString()} and ${new Date(to * 1000).toISOString()}`)
-                const splitSymbol = symbolInfo.name.split(/[:/]/);
+                // const splitSymbol = symbolInfo.name.split(/[:/]/);
                 if (resolution === '1D') {
                     resolution = '1440';
                 }
@@ -261,9 +261,9 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
                 }
                 // sending 2000 default limit
                 this.tradeHistory.getBars(symbolInfo, resolution, from, to, firstDataRequest, 2000).then((data) => {
-                    console.log({data});
+                    // console.log({data});
                     if (data.Response && data.Response === 'Error') {
-                        console.log('CryptoCompare data fetching error :', data.Message);
+                        // console.log('CryptoCompare data fetching error :', data.Message);
                         onHistoryCallback([], {noData: true});
                     }
                     if (data.Data.length) {
@@ -294,17 +294,16 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
                 });
             },
             subscribeBars: (symbolInfo, resolution, onRealtimeCallback, subscribeUID, onResetCacheNeededCallback) => {
-                console.log('subscribeBars Runnning');
+                // console.log('subscribeBars Runnning');
                 this.socketService.subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscribeUID, onResetCacheNeededCallback, history);
             },
             unsubscribeBars: (subscriberUID) => {
-                console.log('unsubscribeBars Running');
-
+                // console.log('unsubscribeBars Running');
                 this.socketService.unsubscribeBars(subscriberUID);
             },
             calculateHistoryDepth: (resolution: ResolutionString, resolutionBack: ResolutionBackValues, intervalBack: number): HistoryDepth | undefined => {
-                console.log('calculate History depth is running ');
-                console.log('resolution ' + resolution);
+                // console.log('calculate History depth is running ');
+                // console.log('resolution ' + resolution);
                 if (resolution === '1D') {
                     return {
                         resolutionBack: 'M',
@@ -328,14 +327,14 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
             },
             getMarks: (symbolInfo, startDate, endDate, onDataCallback, resolution) => {
                 // optional
-                console.log('getMarks Running');
+                // console.log('getMarks Running');
             },
             getTimescaleMarks: (symbolInfo, startDate, endDate, onDataCallback, resolution) => {
                 // optional
-                console.log('getTimeScaleMarks Running');
+                // console.log('getTimeScaleMarks Running');
             },
             getServerTime: (cb) => {
-                console.log('getServerTime Running');
+                // console.log('getServerTime Running');
             }
         };
     }

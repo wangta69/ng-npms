@@ -20,3 +20,8 @@ import { CountUpModule } from 'ng-count-up-js';
   imports: [CountUpModule]
 })
 ```
+#### template.html
+```
+<span appCountUp [endVal]="myNumber" [duration]='0.1'></span> P</div>
+
+```
