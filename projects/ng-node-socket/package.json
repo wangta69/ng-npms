@@ -1,6 +1,6 @@
 {
   "name": "ng-node-socket",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "peerDependencies": {
     "socket.io-client": "^2.3.0"
   },

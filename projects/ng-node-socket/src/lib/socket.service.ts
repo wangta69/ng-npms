@@ -43,7 +43,7 @@ export class SocketService {
         return this.Socket.connect();
     }
 
-    get socket(): any {
+    public socket(): any {
         return this.Socket;
     }
 
