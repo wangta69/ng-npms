@@ -1,0 +1,185 @@
+import { Component, Input,  OnInit, OnChanges, SimpleChange, IterableChanges, IterableDiffer, IterableDiffers, KeyValueChanges, KeyValueDiffer, KeyValueDiffers, ViewChild, ComponentFactoryResolver, OnDestroy } from '@angular/core';
+// import { Component, Input,  OnInit, DoCheck, IterableChanges, IterableDiffer, IterableDiffers, KeyValueChanges, KeyValueDiffer, KeyValueDiffers, ViewChild, ComponentFactoryResolver, OnDestroy } from '@angular/core';
+
+import { ChartDirective } from './chart.directive';
+// import { CandlesticStockComponent } from './stock-candlestic-chart.component';
+// import { LineStockComponent } from './stock-line-chart.component';
+import { LineChartComponent } from './line-chart.component';
+import * as moment from 'moment';
+
+@Component({
+    selector: 'app-chart',
+    template: `
+        <ng-template chart-host></ng-template>
+    `
+})
+export class NgxChartComponent implements OnInit, OnDestroy, OnChanges { // OnChanges,
+
+    @Input() type: string; // candlestic | linestock | line]
+    @Input() data: any;
+    // @Input() set data(data: string) {
+    //     console.log('--------------', data);
+    // }
+    @Input() options: any;
+    @Input() tick: boolean;
+    @Input() gameType: number; // 1, 2, 3, 4, 5분봉
+    @Input() latestGame: any;
+
+    // charts = {candlestic: CandlesticStockComponent, linestock: LineStockComponent};
+    charts = {line: LineChartComponent};
+    componentRef: any;
+    private diffData: IterableDiffer<number>;
+    private diffOption: KeyValueDiffer<any, any>;
+
+//    private diff: KeyValueDiffer<K, V>;
+    private diffType: string;
+    private animRequest = null;
+
+    private tempData = [];
+    private MAX_LENGTH = 100;
+    private duration = 500;
+
+    @ViewChild(ChartDirective, {static: true}) chartHost: ChartDirective;
+    interval: any;
+
+    constructor(
+        private componentFactoryResolver: ComponentFactoryResolver,
+        private iterableDiffers: IterableDiffers,
+        private keyValueDiffers: KeyValueDiffers
+    ) { }
+
+    ngOnInit() {
+        this.diffData = this.iterableDiffers.find(this.data).create();
+        this.diffOption = this.keyValueDiffers.find(this.options).create();
+
+        const now = new Date();
+        for (let i = 0; i < this.MAX_LENGTH; ++i) {
+            this.tempData.push({
+              time: new Date(now.getTime() - ((this.MAX_LENGTH - i) * this.duration)),
+              x: this.randomNumberBounds(0, 5),
+              y: this.randomNumberBounds(0, 2.5),
+              z: this.randomNumberBounds(0, 10)
+            });
+        }
+        setInterval(() => {
+            this._draw();
+        }, 500);
+
+    //    this.tempData = [{close: 12709.5, date: moment.utc().unix(), high: 12711.25, low: 12708.75, open: 12711.25}];
+
+
+        // this.diff = this.diff.find(this.data).create();
+    //    this.diffType = this.iterableDiffers.find(this.type).create();
+    //    this.loadComponent();
+    }
+
+    ngOnDestroy() {
+        // clearInterval(this.interval);
+    }
+
+    ngOnChanges(changes: {[propKey: string]: SimpleChange}) { //
+        if (this.type !== this.diffType) {
+            this.diffType = this.type;
+            this.loadComponent();
+            (this.componentRef.instance as any).options = this.options;
+        }
+        // if (this.diffData) {
+        //     // thid.data = [{close: 12709.5, date: Thu Jan 07 2021 13:04:00 GMT+0900 (대한민국 표준시), high: 12711.25, low: 12708.75, open: 12711.25}]
+        //     const dataChanges: IterableChanges<number> = this.diffData.diff(this.data);
+        //     if (dataChanges) {
+        //         console.log(this.data);
+        //         // 실제 그래프 출력으로 data를 세팅한다.
+        //     //    this.componentRef.instance.data = this.data;
+        //         // console.log('----', this.componentRef.instance.data);
+        //     }
+        // }
+
+        for (const propName in changes) {
+            // console.log(propName);
+            if (changes.hasOwnProperty(propName)) {
+                switch (propName) {
+                    case 'gameType':
+                        this.componentRef.instance.setGameType = this.gameType;
+                        break;
+                    case 'latestGame':
+                        this.componentRef.instance.setLatestGame = this.latestGame;
+                        break;
+                    case 'data':
+                        // this.data = this.data.slice(0, 5);
+                        // this.componentRef.instance.setLatestGame = this.latestGame;
+                        break;
+                }
+            }
+        }
+
+    //    const optionChanges: KeyValueChanges<any, any> = this.diffOption.diff(this.options);
+    //    if (optionChanges) {
+    //        this.componentRef.instance.options = this.options;
+    //    }
+      }
+
+    loadComponent() {
+        const component = this.charts[this.type];
+    //    console.log(component);
+        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
+
+        const viewContainerRef = this.chartHost.viewContainerRef;
+        viewContainerRef.clear();
+        this.componentRef = viewContainerRef.createComponent(componentFactory);
+    //    (this.componentRef.instance as any).data = this.data;
+    //    (this.componentRef.instance as any).options = this.options;
+    }
+
+    private _draw() {
+    //    console.log('_draw', this.tempData);
+        const now = new Date();
+
+        const lineData = {
+          time: now,
+          x: this.randomNumberBounds(0, 5),
+          y: this.randomNumberBounds(0, 2.5),
+          z: this.randomNumberBounds(0, 10)
+        };
+        this.tempData.push(lineData);
+
+        if (this.tempData.length > 30) {
+          this.tempData.shift();
+        }
+
+        this.componentRef.instance.data = this.tempData;
+
+    //    console.log('_draw');
+    //    console.log(moment.utc().unix());
+    //    this.data = [{close: 12709.5, date: Thu Jan 07 2021 13:04:00 GMT+0900 (대한민국 표준시), high: 12711.25, low: 12708.75, open: 12711.25}]
+    //    console.log(this.data);
+        // if (this.data && this.data.length > 0) {
+        //     const newdata = this.data[0];
+        //     // newdata.date = moment.utc().unix();
+        //     newdata.date = Math.round(newdata.date + 0.5);
+        //     console.log(newdata.date);
+        //     this.data.push(newdata);
+        //     this.componentRef.instance.data = this.data;
+        // }
+    //    console.log(this.tempData);
+        // if (this.tempData) {
+        //     const newdata = this.tempData[0];
+        //     // newdata.date = moment.utc().unix();
+        //
+        //     newdata.date = moment.utc().unix();
+        //     this.tempData.push(newdata);
+        //     console.log(moment.utc().unix());
+        //     this.componentRef.instance.data = this.tempData;
+        // }
+        // // console.log(this.componentRef.instance);
+        // setTimeout(this._draw.bind(this), 500);
+        // this.animRequest = window.requestAnimationFrame(this._draw.bind(this));
+    }
+
+
+    // 테스트 데이타 생성용
+    private randomNumberBounds(min, max) {
+      return Math.floor(Math.random() * max) + min;
+    }
+
+
+}
