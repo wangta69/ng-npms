@@ -6,31 +6,32 @@ import { SocketMultiService } from 'ng-node-socket';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public moment_test_data = new Date();
+    public now = new Date();
+    public amount: number;
 
-  constructor (
-      private socket: SocketMultiService,
-     // private commonSvc: CommonService,
+    constructor(
+        private socket: SocketMultiService,
+        // private commonSvc: CommonService,
         //        private http: RestHttpClient,
         //        private storage: LocalStorageService,
         //        private socket: SocketMultiService,
         //        private easeSvc: NgEasingService
-  ) {
+    ) {
 
-  }
+    }
 
-  ngOnInit() {
-    // this.testCommonService();
-    // this.testRestHttpClient();
-    // this.testLocalStorages();
-    // this.testPipeFilter();
-     this.testSocketService();
-    // this.testEaseService();
+    public ngOnInit(): void {
+        // this.testCommonService();
+        // this.testRestHttpClient();
+        // this.testLocalStorages();
+        // this.testPipeFilter();
+         this.testSocketService();
+        // this.testEaseService();
 
-    // const valid = WAValidator.validate('mwt4yQ89ApycbgaP5dFRcEtRbfzHKCg125', 'btc', 'testnet');
-    // console.log('valid');
-    // console.log(valid);
-  }
+        // const valid = WAValidator.validate('mwt4yQ89ApycbgaP5dFRcEtRbfzHKCg125', 'btc', 'testnet');
+        // console.log('valid');
+        // console.log(valid);
+    }
 /*
   testCommonService() {
       console.log(' [ testCommonService ] ============= ');
@@ -75,15 +76,15 @@ export class AppComponent implements OnInit {
     }
   }
 */
-  testSocketService() {
-      console.log(' [ testSocketService ] ============= ');
-      this.socket.init('test', 'http://io.chanceball.com');
+    private testSocketService(): void {
+        console.log(' [ testSocketService ] ============= ');
+        this.socket.init('test', 'http://io.chanceball.com');
 
-       this.socket.On('test', 'connection').subscribe(obj => {
-           console.log('connection');
-          console.log(obj);
-      });
-  }
+        this.socket.On('test', 'connection').subscribe((obj: any) => {
+            console.log('connection');
+            console.log(obj);
+        });
+    }
 /*
   testEaseService() {
       console.log(' [ testEaseService ] ============= ');

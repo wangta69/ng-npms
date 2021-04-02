@@ -19,7 +19,7 @@ export interface CountUpOptions { // (default)
 
 // playground: stackblitz.com/edit/countup-typescript
 export class CountUp {
-    public version = '2.0.0';
+    // public version = '2.0.0';
     private defaults: CountUpOptions = {
         startVal: 0,
         decimalPlaces: 0,
@@ -84,7 +84,7 @@ export class CountUp {
         }
     }
 
-      // determines where easing starts and whether to count down or up
+    // determines where easing starts and whether to count down or up
     private determineDirectionAndSmartEasing(): void {
         const end = (this.finalEndVal) ? this.finalEndVal : this.endVal;
         this.countDown = (this.startVal > end);

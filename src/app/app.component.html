@@ -11,11 +11,10 @@
 -->
 <div>
     <h3>moment pipe test</h3>
-{{ moment_test_data  | moment : 'YYYY-MM-DD HH:mm' }}
+    <span>{{ now  | moment : 'YYYY-MM-DD HH:mm' }}</span>
 </div>
 
 <div>
     <h3>count up directive test</h3>
-<span (click)="betAmount=3000"><span appCountUp [endVal]="betAmount" [duration]='0.1'></span> 클릭하시요</span>
-
+    <span (click)="amount=3000"><span appCountUp [endVal]="amount" [duration]='0.1' [useGrouping]="true"></span> 클릭하시요</span>
 </div>
