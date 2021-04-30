@@ -11,7 +11,14 @@ npm i ng-count-up-js
 
 ## How to use
 ```
-<span (click)="amount=3000"><span appCountUp [endVal]="amount" [duration]='0.1' [useGrouping]="true"></span> click</span>
+<span (click)="amount=3000">
+    <span appCountUp
+        [endVal]="amount"
+        [duration]='0.1'
+        [useGrouping]="true">
+    </span>
+    <span>click</span>
+</span>
 
  [endVal]="display number"
  [duration]='0.1'

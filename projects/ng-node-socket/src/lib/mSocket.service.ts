@@ -13,8 +13,8 @@ export class SocketMultiService {
      * @param String name socketname
      * @param String url 'http://xxx.xxx.xxx.xxx:portNumber';
      */
-    public init(name: string, url: string): void {
-        this.sockets[name] = io(url);
+    public init(name: string, url: string, option?: any): void {
+        this.sockets[name] = io(url, option);
     }
 
     public Emit(name: string, ...args: any[]): void {

@@ -14,9 +14,9 @@ export class SocketService {
 
     constructor() {}
 
-    public init(url: string): void {
+    public init(url: string, option?: any): void {
         this.url = url;
-        this.Socket = io(this.url);
+        this.Socket = io(this.url, option);
     }
 
     /**
@@ -43,7 +43,7 @@ export class SocketService {
         return this.Socket.connect();
     }
 
-    get socket(): any {
+    public socket(): any {
         return this.Socket;
     }
 

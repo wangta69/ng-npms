@@ -6,8 +6,8 @@ import { SocketMultiService } from 'ng-node-socket';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public moment_test_data = new Date();
-
+  public momentTestData = new Date();
+  public betAmount = 1000;
   constructor (
       private socket: SocketMultiService,
      // private commonSvc: CommonService,
@@ -77,10 +77,12 @@ export class AppComponent implements OnInit {
 */
   testSocketService() {
       console.log(' [ testSocketService ] ============= ');
-      this.socket.init('test', 'http://io.chanceball.com');
+      this.socket.init('otcChat', 'http://xxx.xxxx.xxxx', {
+            withCredentials: false,
+        });
 
-       this.socket.On('test', 'connection').subscribe(obj => {
-           console.log('connection');
+      this.socket.On('otcChat', 'connection').subscribe((obj: any) => {
+          console.log('connection');
           console.log(obj);
       });
   }

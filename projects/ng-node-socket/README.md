@@ -23,7 +23,11 @@ import { SocketService } from 'ng-node-socket';
 
 export class AComponent {
     constructor(protected socket:SocketService) {
-        socket.init('http://xxx.xxx.xxx.xxx:yy');
+        socket.init('http://xxx.xxx.xxx.xxx:yy', {
+            withCredentials: false,
+            extraHeaders: {
+            }
+        });
 
         this.socket.On('connection').subscribe(obj => {
            console.log(obj);
@@ -54,8 +58,16 @@ import { SocketMultiService } from 'ng-node-socket';
 
 export class AComponent {
     constructor(protected socket:SocketMultiService) {
-        socket.init('name1', 'http://xxx.xxx.xxx.xxx:port1');
-        socket.init('name2', 'http://xxx.xxx.xxx.xxx:port2');
+        socket.init('name1', 'http://xxx.xxx.xxx.xxx:port1', {
+            withCredentials: false,
+            extraHeaders: {
+            }
+        });
+        socket.init('name2', 'http://xxx.xxx.xxx.xxx:port2', {
+            withCredentials: false,
+            extraHeaders: {
+            }
+        });
 
         this.socket.On('name1', 'connection').subscribe(obj => {
            console.log(obj);
