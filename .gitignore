@@ -48,13 +48,4 @@ Thumbs.db
 
 src/assets/charting_library
 src/assets/datafeeds
-projects/ng-node-socket/node_modules/engine.io-client/CHANGELOG.md
-projects/ng-node-socket/node_modules/engine.io-client/dist/engine.io.js
-projects/ng-node-socket/node_modules/engine.io-client/dist/engine.io.min.js
-projects/ng-node-socket/node_modules/engine.io-client/lib/socket.js
-projects/ng-node-socket/node_modules/engine.io-client/lib/transports/polling-jsonp.js
-projects/ng-node-socket/node_modules/engine.io-client/lib/transports/polling-xhr.js
-projects/ng-node-socket/node_modules/engine.io-client/lib/transports/polling.js
-projects/ng-node-socket/node_modules/engine.io-client/lib/transports/websocket.js
-projects/ng-node-socket/node_modules/engine.io-client/package.json
-projects/ng-node-socket/node_modules/engine.io-client/README.md
+projects/ng-node-socket/node_modules
