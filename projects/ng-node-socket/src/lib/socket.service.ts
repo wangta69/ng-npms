@@ -12,8 +12,6 @@ export class SocketService {
     private onSubscribes: any = {}; //
     private Rooms = [];
 
-    constructor() {}
-
     public init(url: string, option?: any): void {
         this.url = url;
         this.Socket = io(this.url, option);

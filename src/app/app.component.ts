@@ -77,13 +77,17 @@ export class AppComponent implements OnInit {
 */
   testSocketService() {
       console.log(' [ testSocketService ] ============= ');
-      this.socket.init('otcChat', 'http://xxx.xxxx.xxxx', {
-            withCredentials: false,
-        });
+      this.socket.init('otcChat', '//node.ncbit.fxstar.co.kr:5083', {
+        withCredentials: true,
+      });
+
+      // this.socket.init('otcChat', 'http://xxx.xxxx.xxxx', {
+      //   withCredentials: false,
+      // });
 
       this.socket.On('otcChat', 'connection').subscribe((obj: any) => {
-          console.log('connection');
-          console.log(obj);
+        console.log('connection');
+        console.log(obj);
       });
   }
 /*

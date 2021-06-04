@@ -1,8 +1,8 @@
 {
   "name": "ng-node-socket",
-  "version": "1.3.2",
+  "version": "2.0.1",
   "peerDependencies": {
-    "socket.io-client": "^4.0.1"
+    "socket.io-client": "^4.1.2"
   },
   "description": "Tested for angular10",
   "repository": {
@@ -17,7 +17,7 @@
   "author": "pondol",
   "license": "MIT",
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.2.0"
   },
   "main": "karma.conf.js",
   "scripts": {

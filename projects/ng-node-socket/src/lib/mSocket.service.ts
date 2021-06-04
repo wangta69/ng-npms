@@ -7,7 +7,6 @@ import io from 'socket.io-client';
 })
 export class SocketMultiService {
     private sockets: any = {}; // {socketName: io}
-    constructor() {}
 
     /**
      * @param String name socketname
