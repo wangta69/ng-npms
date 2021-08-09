@@ -1,6 +1,6 @@
 # ng-node-socket
 
-Tested for angular5
+Tested for angular10
 
 ## Installation
 ```
