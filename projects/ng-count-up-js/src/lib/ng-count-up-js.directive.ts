@@ -21,18 +21,18 @@ export class CountUpDirective implements OnChanges {
     // @Input('countUp') options: any;
 
     // Optional start value for the count. Defaults to zero.
-    @Input() private startVal: number;
+    @Input() public startVal: number;
 
     // the number to count to
-    @Input() private endVal: number;
+    @Input() public endVal: number;
 
     // Optional duration of the animation in seconds. Default is 2.
-    @Input() private duration: number;
+    @Input() public duration: number;
 
     // Optional number of decimal places. Default is 2.
-    @Input() private decimals: number;
+    @Input() public decimals: number;
 
-    @Input() private useGrouping: boolean;
+    @Input() public useGrouping: boolean;
 
     // Optional flag for specifying whether the element should re-animate when clicked.
     // Default is true.

@@ -1,6 +1,6 @@
 {
   "name": "ng-count-up-js",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "peerDependencies": {},
   "description": "CountUp.js for angular",
   "scripts": {
@@ -23,5 +23,6 @@
   "homepage": "https://github.com/wangta69/ng-count-up-js#readme",
   "dependencies": {
     "tslib": "^2.0.0"
-  }
+  },
+  "main": "karma.conf.js"
 }
