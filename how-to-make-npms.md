@@ -18,7 +18,7 @@
 
 ## npm publish	(기존 것 처리)
 "6.1. npm init (projects/만들려는 프로젝트 폴더/ 에서 해주는 것이 두번 손 안감) (첫 1회 이후에는 하지 않아도 됨)
-6.1.1. ng build --prod LibraryName (프로젝트 root에서 실행)
+6.1.1. ng build --prod LibraryName (projects/  프로젝트 root에서 실행)
 6.2. cd dist/LibraryName
 6.3. npm publish"			
 
