@@ -10,7 +10,7 @@ export class SocketService {
     private Socket: any;
 
     private onSubscribes: any = {}; //
-    private Rooms = [];
+    private Rooms: string[] = [];
 
     public init(url: string, option?: any): void {
         this.url = url;

@@ -2,7 +2,7 @@
   "name": "ng-node-socket",
   "version": "2.0.1",
   "peerDependencies": {
-    "socket.io-client": "^4.1.2"
+    "socket.io-client": "^4.7.1"
   },
   "description": "Tested for angular10",
   "repository": {
@@ -17,9 +17,8 @@
   "author": "pondol",
   "license": "MIT",
   "dependencies": {
-    "tslib": "^2.2.0"
+    "tslib": "^2.3.0"
   },
-  "main": "karma.conf.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

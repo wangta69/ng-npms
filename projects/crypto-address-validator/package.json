@@ -1,10 +1,7 @@
 {
   "name": "crypto-address-validator",
   "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0"
-  },
+  "peerDependencies": { },
   "dependencies": {
     "@types/lodash": "^4.14.123",
     "wallet-address-validator": "^0.2.4"

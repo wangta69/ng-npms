@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'enl-crypto-address-validator',
@@ -7,13 +7,9 @@ import { Component, OnInit } from '@angular/core';
       crypto-address-validator works!
     </p>
   `,
-  styles: []
+  styles: [
+  ]
 })
-export class CryptoAddressValidatorComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class CryptoAddressValidatorComponent {
 
 }

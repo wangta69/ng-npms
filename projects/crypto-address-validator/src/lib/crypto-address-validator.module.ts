@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CryptoAddressValidatorComponent } from './crypto-address-validator.component';
 
+
+
 @NgModule({
-  declarations: [CryptoAddressValidatorComponent],
+  declarations: [
+    CryptoAddressValidatorComponent
+  ],
   imports: [
   ],
-  exports: [CryptoAddressValidatorComponent]
+  exports: [
+    CryptoAddressValidatorComponent
+  ]
 })
 export class CryptoAddressValidatorModule { }

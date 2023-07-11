@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     // this.testRestHttpClient();
     // this.testLocalStorages();
     // this.testPipeFilter();
-     this.testSocketService();
+    //  this.testSocketService();
     // this.testEaseService();
 
     // const valid = WAValidator.validate('mwt4yQ89ApycbgaP5dFRcEtRbfzHKCg125', 'btc', 'testnet');
@@ -77,7 +77,7 @@ export class AppComponent implements OnInit {
 */
   testSocketService() {
       console.log(' [ testSocketService ] ============= ');
-      this.socket.init('otcChat', '//node.ncbit.fxstar.co.kr:5083', {
+      this.socket.init('otcChat', '//socket.domain.com:5083', {
         withCredentials: true,
       });
 

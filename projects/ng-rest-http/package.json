@@ -4,7 +4,7 @@
   "peerDependencies": {
   },
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.3.0"
     },
 "description": "http client module for Angular [ tested for angular6 ]",
   "main": "karma.conf.js",

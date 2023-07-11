@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/wangta69/ng-count-up-js#readme",
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.3.0"
   },
   "main": "karma.conf.js"
 }
