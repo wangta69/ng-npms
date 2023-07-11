@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { SocketMultiService } from 'ng-node-socket';
+// import { SocketMultiService } from 'ng-node-socket';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public momentTestData = new Date();
-  public betAmount = 1000;
+  // public momentTestData = new Date();
+  // 
   constructor (
-      private socket: SocketMultiService,
+      // private socket: SocketMultiService,
      // private commonSvc: CommonService,
         //        private http: RestHttpClient,
         //        private storage: LocalStorageService,
@@ -75,21 +75,21 @@ export class AppComponent implements OnInit {
     }
   }
 */
-  testSocketService() {
-      console.log(' [ testSocketService ] ============= ');
-      this.socket.init('otcChat', '//socket.domain.com:5083', {
-        withCredentials: true,
-      });
+  // testSocketService() {
+  //     console.log(' [ testSocketService ] ============= ');
+  //     this.socket.init('otcChat', '//socket.domain.com:5083', {
+  //       withCredentials: true,
+  //     });
 
-      // this.socket.init('otcChat', 'http://xxx.xxxx.xxxx', {
-      //   withCredentials: false,
-      // });
+  //     // this.socket.init('otcChat', 'http://xxx.xxxx.xxxx', {
+  //     //   withCredentials: false,
+  //     // });
 
-      this.socket.On('otcChat', 'connection').subscribe((obj: any) => {
-        console.log('connection');
-        console.log(obj);
-      });
-  }
+  //     this.socket.On('otcChat', 'connection').subscribe((obj: any) => {
+  //       console.log('connection');
+  //       console.log(obj);
+  //     });
+  // }
 /*
   testEaseService() {
       console.log(' [ testEaseService ] ============= ');

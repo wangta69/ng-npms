@@ -9,13 +9,39 @@
 {{ comma_test_vale | comma_add}}
 </div>
 -->
-<div>
+<!-- <div>
     <h3>moment pipe test</h3>
 {{ momentTestData  | moment : 'YYYY-MM-DD HH:mm' }}
 </div>
 
-<div>
-    <h3>count up directive test</h3>
-<span (click)="betAmount=3000"><span appCountUp [endVal]="betAmount" [duration]='0.1'></span> 클릭하시요</span>
+ -->
 
+<div id="layout">
+  <div id="left">
+    <ul>
+      <li><a href="ng-moment-pipes">ng-moment-pipes</a></li>
+      <li><a href="ng-count-up-js">ng-count-up-js</a></li>
+      <li><a href="ng-node-socket">ng-node-socket</a></li>
+
+    </ul>
+  </div>
+  <div id="right">
+    <router-outlet></router-outlet>
+  </div>
 </div>
+<style>
+  #layout {
+    display: flex;
+    height: 100vh;
+  }
+
+  #left {
+    background-color: bisque;
+    padding: 10px;
+  }
+  #right {
+    background-color: rgb(196, 255, 216);
+    width: 100%;
+  }
+</style>
+

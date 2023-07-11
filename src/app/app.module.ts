@@ -3,16 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { MomentPipesModule } from 'ng-moment-pipes';
 
-import { CountUpModule } from 'ng-count-up-js';
+import { CountUpModule } from './projects/ng-count-up-js/src/public-api';
+// import { CountUpModule } from 'ng-count-up-js';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SocketMultiService } from 'ng-node-socket';
+
+import {NgCountUpComponent} from './pages/ng-count-up-js/component';
 // import { SocketMultiService } from '../../projects/ng-node-socket/src/public-api';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NgCountUpComponent
   ],
   imports: [
     BrowserModule,
