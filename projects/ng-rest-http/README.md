@@ -1,24 +1,56 @@
-# NgRestHttp
+# ng-rest-http
+http client module for Angular [ tested for angular6 ]
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.0.
+## Installation
+```
+npm install ng-rest-http
+```
 
-## Code scaffolding
+## How to use
+#### app.module.ts
+```
+import { RestHttpClientModule } from 'ng-rest-http'
+@NgModule({
+	imports: [ RestHttpClientModule ]
+})
 
-Run `ng generate component component-name --project ng-rest-http` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ng-rest-http`.
-> Note: Don't forget to add `--project ng-rest-http` or else it will be added to the default project in your `angular.json` file. 
+```
+#### app.component.ts
+```
+import { RestHttpClient } from 'ng-rest-http'
 
-## Build
+export class AComponent{
+	constructor(protected http:RestHttpClient){}
 
-Run `ng build ng-rest-http` to build the project. The build artifacts will be stored in the `dist/` directory.
+	const api_url = 'http://sample.domain.com/api/what';
+	const params = {arg1: 'arg'.....};
+	const headers = {
+		'Access-Control-Allow-Origin': '*',
+		'Content-Type': 'application/json',
+		'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+		'Access-Control-Allow-Headers': '*'
+	};
 
-## Publishing
+	private get_sample(){
+		this.http.get({url: api_url, params, headers}).then((res) => {
+			console.log(res)
+			// HttpResponse {body, headers: {...}, ok, status, statusText, type, url}
+		});
+	}
 
-After building your library with `ng build ng-rest-http`, go to the dist folder `cd dist/ng-rest-http` and run `npm publish`.
+	private post_sample(){
+		this.http.post({url: api_url, params, headers}).then((res) => {
+			console.log(res)
+			// HttpResponse {body, headers: {...}, ok, status, statusText, type, url}
+		});
+	}
 
-## Running unit tests
-
-Run `ng test ng-rest-http` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+	private filedownload_sample(){
+		this.http.filedownload({url: api_url, params, headers}).then((blob) => {
+			console.log(blob)
+			// this.file.writeFile(this.localDirectory, link.icon, blob, {replace: true})
+		});
+	}
+}
+```
+[create user service for convenience](doc/create-new-service.md)

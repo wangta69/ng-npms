@@ -5,33 +5,33 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class UploadService {
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    // file from event.target.files[0]
-    uploadFile(url: string, file: File): Observable<HttpEvent<any>> {
+  // file from event.target.files[0]
+  uploadFile(url: string, file: File): Observable<HttpEvent<any>> {
 
-        const formData = new FormData();
-        formData.append('upload', file);
+    const formData = new FormData();
+    formData.append('upload', file);
 
-        const params = new HttpParams();
+    const params = new HttpParams();
 
-        const options = {
-            params: params,
-            reportProgress: true,
-        };
+    const options = {
+      params: params,
+      reportProgress: true,
+    };
 
-        /*
-        const options = {
-            headers: new HttpHeaders().set('Authorization', this.loopBackAuth.accessTokenId),
-            params: params,
-            reportProgress: true,
-            withCredentials: true,
-        }
-        */
-
-        const req = new HttpRequest('POST', url, formData, options);
-        return this.http.request(req); // return event
+    /*
+    const options = {
+        headers: new HttpHeaders().set('Authorization', this.loopBackAuth.accessTokenId),
+        params: params,
+        reportProgress: true,
+        withCredentials: true,
     }
+    */
+
+    const req = new HttpRequest('POST', url, formData, options);
+    return this.http.request(req); // return event
+}
 }
 
 /* in your component
