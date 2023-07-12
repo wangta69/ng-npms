@@ -37,24 +37,24 @@ export class CountUp {
 
 	private el: HTMLElement | HTMLInputElement | null;
 	private rAF: any;
-	private startTime!: number;
+	private startTime!: number | null;
 	private decimalMult: number;
 	private remaining!: number;
-	private finalEndVal: number = -1; // for smart easing
+	private finalEndVal: number | null = null; // for smart easing
 	private useEasing: boolean = true;
 	private countDown = false;
 	public formattingFn: (num: number) => string;
 	public easingFn: (t: number, b: number, c: number, d: number) => number;
 	public callback?: (args?: any) => any;
 	public error = '';
-	public startVal = 0;
+	public startVal: number | null = 0;
 	public duration!: number;
 	public paused = true;
-	public frameVal: number;
+	public frameVal: number | null;
 
 	constructor(
 		private target: string | HTMLElement | HTMLInputElement,
-		private endVal: number,
+		private endVal: number | null,
 		private options: CountUpOptions
 	) {
 		this.options = {
@@ -87,38 +87,42 @@ export class CountUp {
 
 	// determines where easing starts and whether to count down or up
 	private determineDirectionAndSmartEasing(): void {
-		const end = (this.finalEndVal) ? this.finalEndVal : this.endVal;
-		this.countDown = (this.startVal > end);
-		const animateAmount = end - this.startVal;
-		if (Math.abs(animateAmount) > this.options.smartEasingThreshold) {
-			this.finalEndVal = end;
-			const up = (this.countDown) ? 1 : -1;
-			this.endVal = end + (up * this.options.smartEasingAmount);
-			this.duration = this.duration / 2;
-		} else {
-			this.endVal = end;
-			this.finalEndVal = -1;
-		}
-		if (this.finalEndVal) {
-			this.useEasing = false;
-		} else {
-			this.useEasing = this.options?.useEasing;
+		
+		const end = (this.finalEndVal !== null) ? this.finalEndVal : this.endVal;
+		if (this.startVal !== null && end !== null) {
+			this.countDown = (this.startVal > end);
+			const animateAmount = end - this.startVal;
+			if (Math.abs(animateAmount) > this.options.smartEasingThreshold) {
+				this.finalEndVal = end;
+				const up = (this.countDown) ? 1 : -1;
+				this.endVal = end + (up * this.options.smartEasingAmount);
+				this.duration = this.duration / 2;
+			} else {
+				this.endVal = end;
+				this.finalEndVal = null;
+			}
+			if (this.finalEndVal !== null) {
+				this.useEasing = false;
+			} else {
+				this.useEasing = this.options?.useEasing;
+			}
 		}
 	}
 
 		// start animation
 	public start(callback?: (args?: any) => any): void {
-			if (this.error) {
-					return;
-			}
-			this.callback = callback;
-			if (this.duration > 0) {
-					this.determineDirectionAndSmartEasing();
-					this.paused = false;
-					this.rAF = requestAnimationFrame(this.count);
-			} else {
-					this.printValue(this.endVal);
-			}
+
+		if (this.error) {
+			return;
+		}
+		this.callback = callback;
+		if (this.duration > 0) {
+			this.determineDirectionAndSmartEasing();
+			this.paused = false;
+			this.rAF = requestAnimationFrame(this.count);
+		} else {
+			this.printValue(this.endVal);
+		}
 	}
 
 		// pause/resume animation
@@ -126,7 +130,7 @@ export class CountUp {
 		if (!this.paused) {
 			cancelAnimationFrame(this.rAF);
 		} else {
-			this.startTime = -1;
+			this.startTime = null;
 			this.duration = this.remaining;
 			this.startVal = this.frameVal;
 			this.determineDirectionAndSmartEasing();
@@ -148,13 +152,13 @@ export class CountUp {
 		// pass a new endVal and start animation
 	public update(newEndVal: number): void {
 		cancelAnimationFrame(this.rAF);
-		this.startTime = -1;
+		this.startTime = null;
 		this.endVal = this.validateValue(newEndVal);
 		if (this.endVal === this.frameVal) {
 			return;
 		}
 		this.startVal = this.frameVal;
-		if (!this.finalEndVal) {
+		if (this.finalEndVal === null) {
 			this.resetDuration();
 		}
 		this.determineDirectionAndSmartEasing();
@@ -162,38 +166,39 @@ export class CountUp {
 	}
 
 	public count = (timestamp: number) => {
-		if (!this.startTime) { this.startTime = timestamp; }
-
+		if (this.startTime === null) { this.startTime = timestamp; }
 		const progress = timestamp - this.startTime;
 		this.remaining = this.duration - progress;
 
 		// to ease or not to ease
-		if (this.useEasing) {
-			if (this.countDown) {
-				this.frameVal = this.startVal - this.easingFn(progress, 0, this.startVal - this.endVal, this.duration);
+		if (this.startVal !== null && this.endVal !== null) {
+
+		
+			if (this.useEasing) {
+				if (this.countDown) {
+					this.frameVal = this.startVal - this.easingFn(progress, 0, this.startVal - this.endVal, this.duration);
+				} else {
+					this.frameVal = this.easingFn(progress, this.startVal, this.endVal - this.startVal, this.duration);
+				}
 			} else {
-				this.frameVal = this.easingFn(progress, this.startVal, this.endVal - this.startVal, this.duration);
+				if (this.countDown) {
+					this.frameVal = this.startVal - ((this.startVal - this.endVal) * (progress / this.duration));
+				} else {
+					this.frameVal = this.startVal + (this.endVal - this.startVal) * (progress / this.duration);
+				}
 			}
-		} else {
+			// don't go past endVal since progress can exceed duration in the last frame
 			if (this.countDown) {
-				this.frameVal = this.startVal - ((this.startVal - this.endVal) * (progress / this.duration));
+					this.frameVal = (this.frameVal < this.endVal) ? this.endVal : this.frameVal;
 			} else {
-				this.frameVal = this.startVal + (this.endVal - this.startVal) * (progress / this.duration);
+					this.frameVal = (this.frameVal > this.endVal) ? this.endVal : this.frameVal;
 			}
+			// decimal
+			this.frameVal = Math.round(this.frameVal * this.decimalMult) / this.decimalMult;
+			// format and print value
+			this.printValue(this.frameVal);
 		}
 
-		// don't go past endVal since progress can exceed duration in the last frame
-		if (this.countDown) {
-				this.frameVal = (this.frameVal < this.endVal) ? this.endVal : this.frameVal;
-		} else {
-				this.frameVal = (this.frameVal > this.endVal) ? this.endVal : this.frameVal;
-		}
-
-		// decimal
-		this.frameVal = Math.round(this.frameVal * this.decimalMult) / this.decimalMult;
-
-		// format and print value
-		this.printValue(this.frameVal);
 
 		// whether to continue
 		if (progress < this.duration) {
@@ -208,16 +213,18 @@ export class CountUp {
 		}
 	}
 
-	public printValue(val: number): void {
-		const result = this.formattingFn(val);
-		if (this.el) {
-			if (this.el.tagName === 'INPUT') {
-				const input = this.el as HTMLInputElement;
-				input.value = result;
-			} else if (this.el.tagName === 'text' || this.el.tagName === 'tspan') {
-				this.el.textContent = result;
-			} else {
-				this.el.innerHTML = result;
+	public printValue(val: number | null): void {
+		if (val) {
+			const result = this.formattingFn(val);
+			if (this.el) {
+				if (this.el.tagName === 'INPUT') {
+					const input = this.el as HTMLInputElement;
+					input.value = result;
+				} else if (this.el.tagName === 'text' || this.el.tagName === 'tspan') {
+					this.el.textContent = result;
+				} else {
+					this.el.innerHTML = result;
+				}
 			}
 		}
 	}
@@ -226,18 +233,18 @@ export class CountUp {
 		return (typeof n === 'number' && !isNaN(n));
 	}
 
-	public validateValue(value?: number): number {
+	public validateValue(value?: number | null): number | null {
 		const newValue = Number(value);
 		if (!this.ensureNumber(newValue)) {
 			this.error = `[CountUp] invalid start or end value: ${value}`;
-			return -1;
+			return null;
 		} else {
 			return newValue;
 		}
 	}
 
 	private resetDuration(): void {
-		this.startTime = -1;
+		this.startTime = null;
 		this.duration = Number(this.options?.duration) * 1000;
 		this.remaining = this.duration;
 	}
