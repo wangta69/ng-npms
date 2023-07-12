@@ -6,8 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  // public momentTestData = new Date();
-  // 
+
   constructor (
       // private socket: SocketMultiService,
      // private commonSvc: CommonService,
