@@ -1,9 +1,10 @@
 {
   "name": "ng-count-up-js",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "peerDependencies": {},
   "description": "CountUp.js for angular",
   "scripts": {
+    "postinstall": "ngcc",
     "test": "angular countUp.js"
   },
   "keywords": [
