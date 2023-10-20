@@ -6,11 +6,13 @@ import { MomentPipesModule } from 'ng-moment-pipes';
 
 // import { CountUpModule } from './projects/ng-count-up-js/src/public-api';
 import { CountUpModule } from 'ng-count-up-js';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { RestHttpClientModule } from './projects/ng-rest-http/src/public-api';
+// import { RestHttpClientModule } from 'ng-rest-http'
 import { SocketMultiService } from 'ng-node-socket';
 
-import { RestHttpClientModule } from 'ng-rest-http'
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 import {NgCountUpComponent} from './pages/ng-count-up-js/component';
 import {NgMomentPipesComponent} from './pages/ng-moment-pipes/component';

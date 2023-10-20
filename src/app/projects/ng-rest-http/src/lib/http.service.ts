@@ -1,12 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { HttpClient, HttpRequest, HttpBackend, HttpHandler, HttpEvent, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError, of } from 'rxjs';
+import { retry, catchError} from 'rxjs/operators';
+
+// abstract class HttpBackend implements HttpHandler {
+//   abstract handle(req: HttpRequest<any>): Observable<HttpEvent<any>>
+// }
 
 @Injectable()
 export class RestHttpClient {
-  constructor(private http: HttpClient) {}
-
+  private http: HttpClient;
+//  constructor(private http: HttpClient) {}
+  constructor(private handler: HttpBackend) {
+    this.http = new HttpClient(handler);
+  }
+    
   /**
    * @param Object obj {url, params, headers}
    * url : String,
@@ -14,6 +22,23 @@ export class RestHttpClient {
    * headers {k1:v1, k2:v2....}
    * @return Callback Function
    */
+
+  // get(obj: any): Promise<any> {
+  //   const apiUrl = obj.url;
+  //   const result = this.http.get(apiUrl).pipe(
+ 
+  //     retry(1),
+ 
+  //     catchError(this.handleError)
+ 
+  //   );
+
+  //   console.log('result >>', result);
+
+  //   return new Promise((resolve, reject) => {});
+ 
+  // }
+
   public get(obj: any): Promise<any> {
     const apiUrl = obj.url;
     const body: any = {};
@@ -44,18 +69,98 @@ export class RestHttpClient {
       body.headers = this.createHeders(obj.headers);
     }
 
+    console.log('apiUrl >>', apiUrl);
+    // const result = this.http.get(apiUrl, body).pipe(catchError(this.handleError) => []);
+    // const result = this.http.get(apiUrl, body).pipe(catchError(() => [])).subscribe({});
+    // const result = this.http.get(apiUrl, body).pipe(catchError(this.handleError));
+    
+    // console.log('result======================================>> result >>', result);
     return new Promise((resolve, reject) => {
-      this.http.get(apiUrl, body)
-      .pipe (
-        catchError(this.handleError)
-      )
-      .subscribe({
-        next: (v) => resolve(v),
-        error: (e) => reject(e), //  this.logError(e),
-        complete: () => console.info('complete') 
-      })
+      try {
+        this.http.request('GET', apiUrl, body)
+        .pipe (
+          // return of(null);
+          // catchError( return of(null);
+          // //this.handleError
+          // )
+         
+          catchError(err => {
+            // console.error(err);
+            // ;
+            // throw 'error in source. Details: ' + err;
+            return of(err); // return null
+            // return of(this.handleError(err)); // return null
+           
+          })
+        )
+        .subscribe({
+          next: (v) => resolve(v),
+          // error: (e: HttpErrorResponse) => reject(e), //  this.logError(e),
+          complete: () => console.info('complete') 
+        })
+      } catch(e) {
+        console.log('catch errrrr =======================================');
+        reject(e);
+      }
     })
   }
+
+  // public get1(obj: any): Promise<any> {
+  //   const apiUrl = obj.url;
+  //   const body: any = {};
+  //   body.observe = 'response';
+
+  //   if (!Object.entries) {
+  //     Object.entries = ( entryObj: any ) => {
+  //       const ownProps = Object.keys( entryObj );
+  //       let i = ownProps.length;
+  //       const resArray = new Array(i); // preallocate the Array
+  //       while (i--) {
+  //         resArray[i] = [ownProps[i], entryObj[ownProps[i]]];
+  //       }
+  //       return resArray;
+  //     };
+  //   }
+
+  //   if (typeof obj.params !== 'undefined') {
+  //     let Params = new HttpParams();
+  //     Object.entries(obj.params).forEach(
+  //       ([key, value]) => Params = Params.append(key, String(value))
+  //     );
+
+  //     body.params = Params;
+  //   }
+
+  //   if (typeof obj.headers !== 'undefined') {
+  //     body.headers = this.createHeders(obj.headers);
+  //   }
+
+  //   console.log('apiUrl >>', apiUrl);
+  //   // const result = this.http.get(apiUrl, body).pipe(catchError(this.handleError) => []);
+  //   // const result = this.http.get(apiUrl, body).pipe(catchError(() => [])).subscribe({});
+  //   const result = this.http.get(apiUrl, body).pipe(catchError(this.handleError));
+    
+  //   console.log('result======================================>> result >>', result);
+  //   return new Promise((resolve, reject) => {
+  //     try {
+  //       this.http.get(apiUrl, body)
+  //       .pipe (
+  //         // catchError(this.handleError)
+  //         catchError(err => {
+  //           throw 'error in source. Details: ' + err;
+  //         })
+  //       )
+  //       .subscribe({
+  //         next: (v) => resolve(v),
+  //         // error: (e: HttpErrorResponse) => reject(e), //  this.logError(e),
+  //         complete: () => console.info('complete') 
+  //       })
+  //     } catch(e) {
+  //       console.log('catch errrrr =======================================');
+  //       reject(e);
+  //     }
+  //   })
+  // }
 
   /**
    * @param Object obj {url, params}
@@ -192,21 +297,40 @@ export class RestHttpClient {
     }
   }
 
-  private handleError(error: Response | any): any {
-    let errMsg: string;
-    if (error instanceof Response) {
-      errMsg = '';
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
+  // private handleError(error: HttpErrorResponse): any {
+  //   console.log('handleError ..........................');
+  //   let errMsg: string;
+  //   if (error instanceof Response) {
+  //     errMsg = '';
+  //   } else {
+  //     errMsg = error.message ? error.message : error.toString();
+  //   }
 
-    // return throwError(errMsg);
-    return throwError(()=> new Error(errMsg));
+  //   // return throwError(errMsg);
+  //   return throwError(()=> new Error(errMsg));
+  // }
+
+  private handleError(error: HttpErrorResponse) {
+    console.log('handleError');
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+    }
+    // new HttpErrorResponse({body: {error: true}});
+    // Return an observable with a user-facing error message.
+    return error;
+    // return throwError(() => new Error('Something bad happened; please try again later.'));
+
   }
 
   private logError(err: string): void {
     console.error('There was an error: ');
-    console.error(err);
+    // console.error(err);
   }
 
   /**
@@ -258,7 +382,7 @@ export class RestHttpClient {
     return new Promise((resolve) => {
       this.http.get(apiUrl, body)
       .pipe (
-        catchError(this.handleError)
+        // catchError(this.handleError)
       )
       .subscribe({
         next: (v: any) => resolve(v.body),

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RestHttpClient } from 'ng-rest-http'
+// import { RestHttpClient } from 'ng-rest-http';
+import { RestHttpClient } from '../../projects/ng-rest-http/src/public-api';
 @Component({
   selector: 'app-root',
   templateUrl:'./component.html'
@@ -25,25 +26,33 @@ export class NgRestHttpComponent implements OnInit{
     console.log('ngOninit start');
     this.http.get({url: 'https://www.onstory.fun/api/v1/test', params: this.params, headers: this.headers}).then((res) => {
 
-      console.log('res>>', res);
+      console.log('res >>>>>>>', res);
     });
   }
 
-  private get_sample(){
-    this.http.get({url: this.api_url, params: this.params, headers: this.headers}).then((res) => {
-      console.log(res);
-      // HttpResponse {body, headers: {...}, ok, status, statusText, type, url}
-    });
+  public async get_sample(){
+    // this.http.get({url: this.api_url, params: this.params, headers: this.headers}).then((res) => {
+    //   console.log(res);
+    //   // HttpResponse {body, headers: {...}, ok, status, statusText, type, url}
+    // });
+    try {
+      const result = await this.http.get({url: this.api_url, params: this.params, headers: this.headers});
+      console.log('result .......................... result >> ', result);
+    } catch(e) {
+      console.log('errrrrrrrrrrrrrrrrrr >> e >', e);
+    }
+    console.log('reach to next step');
+    
   }
 
-  private post_sample(){
+  public post_sample(){
     this.http.post({url: this.api_url, params: this.params, headers: this.headers}).then((res) => {
       console.log(res);
       // HttpResponse {body, headers: {...}, ok, status, statusText, type, url}
     });
   }
 
-  private filedownload_sample(){
+  public filedownload_sample(){
     this.http.filedownload({url: this.api_url, params: this.params, headers: this.headers}).then((blob) => {
       console.log(blob);
       // this.file.writeFile(this.localDirectory, link.icon, blob, {replace: true})
