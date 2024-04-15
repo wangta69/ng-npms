@@ -21,9 +21,9 @@
       "ng-functions": [
         "dist/ng-functions"
       ],
-      "ng-moment-pipes": [
-        "dist/ng-moment-pipes"
-      ],
+      // "ng-moment-pipes": [
+      //   "dist/ng-moment-pipes"
+      // ],
       "ng-node-socket": [
         "dist/ng-node-socket"
       ],
