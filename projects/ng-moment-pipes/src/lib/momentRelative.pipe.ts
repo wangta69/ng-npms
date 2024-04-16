@@ -1,6 +1,4 @@
 import {Pipe, PipeTransform} from '@angular/core';
-// import * as  _moment from 'moment';
-// const moment = _moment;
 import moment, {Moment} from 'moment';
 /**
  * Format Dates
