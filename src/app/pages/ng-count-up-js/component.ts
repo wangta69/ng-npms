@@ -5,7 +5,8 @@ import { Component,  OnInit } from '@angular/core';
   templateUrl:'./component.html'
 })
 export class NgCountUpComponent implements OnInit{
-  public betAmount = 1000;
+  public startVal = 1000;
+  public endVal = 0;
   constructor(
   ) { }
 

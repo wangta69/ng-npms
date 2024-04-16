@@ -16,7 +16,8 @@
         "dist/crypto-address-validator"
       ],
       "ng-count-up-js": [
-        "dist/ng-count-up-js"
+        "src/app/projects/ng-count-up-js/src/public-api"
+        // "dist/ng-count-up-js"
       ],
       "ng-functions": [
         "dist/ng-functions"

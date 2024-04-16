@@ -61,12 +61,15 @@ export class CountUp {
 			...this.defaults,
 			...options
 		};
+
+
 		this.formattingFn = (this.options.formattingFn) ?
 			this.options.formattingFn : this.formatNumber;
 		this.easingFn = (this.options.easingFn) ?
 			this.options.easingFn : this.easeOutExpo;
 
 		this.startVal = this.validateValue(this.options.startVal);
+		// this.startVal = this.options.startVal ? this.validateValue(this.options.startVal) : this.endVal;
 		this.frameVal = this.startVal;
 		this.endVal = this.validateValue(endVal);
 		this.options.decimalPlaces = Math.max(0 || this.options.decimalPlaces);
@@ -154,13 +157,17 @@ export class CountUp {
 		cancelAnimationFrame(this.rAF);
 		this.startTime = null;
 		this.endVal = this.validateValue(newEndVal);
+
 		if (this.endVal === this.frameVal) {
 			return;
 		}
+
+
 		this.startVal = this.frameVal;
 		if (this.finalEndVal === null) {
 			this.resetDuration();
 		}
+
 		this.determineDirectionAndSmartEasing();
 		this.rAF = requestAnimationFrame(this.count);
 	}
@@ -214,7 +221,7 @@ export class CountUp {
 	}
 
 	public printValue(val: number | null): void {
-		if (val) {
+		if (typeof val === 'number') {
 			const result = this.formattingFn(val);
 			if (this.el) {
 				if (this.el.tagName === 'INPUT') {
