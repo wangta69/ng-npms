@@ -4,5 +4,48 @@
 projects를 app 내부에서 호출하여 사용할 경우는 정상적으로 작동하나 projects를 만들어 외부에서 호출할때는 에러가 발생
   <div>
       <h3>moment pipe test</h3>
-    {{ today  | moment : 'YYYY-MM-DD HH:mm' }}
+      <table class="table">
+        <tr>
+          <th>pipe</th>
+          <th>사용법</th>
+          <th>input</th>
+          <th>result</th>
+        </tr>
+        <tr>
+          <td>moment</td>
+          <td>moment : 'YYYY-MM-DD HH:mm' </td>
+          <td>{{today}}</td>
+          <td>{{ today  | moment : 'YYYY-MM-DD HH:mm' }}</td>
+        </tr>
+        <tr>
+          <td>momentLocal</td>
+          <td>momentLocal : 'YYYY-MM-DD HH:mm'</td>
+          <td>'Tue Apr 16 2024 15:36:12'</td>
+          <td>{{ 'Tue Apr 16 2024 15:36:12'  | momentLocal : 'YYYY-MM-DD HH:mm' }}</td>
+        </tr>
+        <tr>
+          <td>momentUnix</td>
+          <td>momentUnix : '1721232345'</td>
+          <td>1721232345</td>
+          <td>{{ 1721232345  | momentUnix : 'YYYY-MM-DD HH:mm' }}</td>
+        </tr>
+        <tr>
+          <td>momentRelative</td>
+          <td>momentUnix : '1721232345'</td>
+          <td>1721232345</td>
+          <td>{{ today  | momentRelative : 'YYYY-MM-DD HH:mm' }}</td>
+        </tr>
+        <tr>
+          <td>momentRelativeOf</td>
+          <td>momentRelativeOf : '1721232345'</td>
+          <td>1721232345</td>
+          <td>{{ 'startOf'  | momentRelativeOf: '1721232345' }}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td> </td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
   </div>

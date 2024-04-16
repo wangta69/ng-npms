@@ -1,6 +1,6 @@
 {
   "name": "ng-functions",
-  "version": "6.0.6",
+  "version": "6.1.0",
   "peerDependencies": {
   },
   "description": "A collection of commonly used functions for angular",
@@ -21,5 +21,5 @@
   "bugs": {
     "url": "https://github.com/wangta69/ng-functions/issues"
   },
-  "homepage": "https://github.com/wangta69/ng-functions#readme"
+  "homepage": "https://www.onstory.fun/npms/ng-functions"
 }
