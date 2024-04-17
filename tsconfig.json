@@ -13,26 +13,33 @@
     "sourceMap": true,
     "paths": {
       "crypto-address-validator": [
-        "dist/crypto-address-validator"
+        // "dist/crypto-address-validator"
+        "projects/crypto-address-validator/src/public-api"
       ],
       "ng-count-up-js": [
-        "src/app/projects/ng-count-up-js/src/public-api"
+        // "src/app/projects/ng-count-up-js/src/public-api"
+        "projects/ng-count-up-js/src/public-api"
         // "dist/ng-count-up-js"
       ],
       "ng-functions": [
-        "dist/ng-functions"
+        // "dist/ng-functions"
+        "projects/ng-functions/src/public-api"
       ],
       "ng-moment-pipes": [
         "dist/ng-moment-pipes"
+        // "projects/ng-moment-pipes/src/public-api"
       ],
       "ng-node-socket": [
-        "dist/ng-node-socket"
+        // "dist/ng-node-socket"
+        "projects/ng-node-socket/src/public-api"
       ],
       "ng-pipe-filter": [
-        "dist/ng-pipe-filter"
+        // "dist/ng-pipe-filter"
+        "projects/ng-pipe-filter/src/public-api"
       ],
       "ng-rest-http": [
-        "dist/ng-rest-http"
+        // "dist/ng-rest-http"
+        "projects/ng-rest-http/src/public-api"
       ]
     },
     "declaration": false,

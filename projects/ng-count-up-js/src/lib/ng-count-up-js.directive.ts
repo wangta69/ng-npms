@@ -52,31 +52,24 @@ export class CountUpDirective implements OnChanges {
   }
 
   private createCountUp(): any {
-    const start = this.startVal || 0;
+    const startVal = this.startVal || 0;
     const duration = this.duration || 2;
     const decimals = this.decimals || 0;
     const useGrouping = typeof this.useGrouping === 'undefined' ? true : this.useGrouping; // 3,000 (true) vs 3000 (false)
 
     if (!this.duration) {
-        this.duration = duration;
+      this.duration = duration;
     }
 
     this.options = {
-        start,
-        duration,
-        decimals,
-        useGrouping
+      startVal,
+      duration,
+      decimals,
+      useGrouping
     };
 
 
     let countUp = new CountUp(this.el.nativeElement, this.endVal, this.options);
-    const diff = Math.abs(this.endVal - start);
-    // make easing smoother for large numbers
-    if (diff > 999) {
-        const up = (this.endVal > start) ? -1 : 1;
-        countUp = new CountUp(this.el.nativeElement, this.endVal + (up * 100), this.options);
-    }
-
     return countUp;
   }
 

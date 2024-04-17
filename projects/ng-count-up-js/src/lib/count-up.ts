@@ -63,10 +63,8 @@ export class CountUp {
 		};
 
 
-		this.formattingFn = (this.options.formattingFn) ?
-			this.options.formattingFn : this.formatNumber;
-		this.easingFn = (this.options.easingFn) ?
-			this.options.easingFn : this.easeOutExpo;
+		this.formattingFn = (this.options.formattingFn) ? this.options.formattingFn : this.formatNumber;
+		this.easingFn = (this.options.easingFn) ? this.options.easingFn : this.easeOutExpo;
 
 		this.startVal = this.validateValue(this.options.startVal);
 		// this.startVal = this.options.startVal ? this.validateValue(this.options.startVal) : this.endVal;

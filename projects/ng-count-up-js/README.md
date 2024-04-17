@@ -1,24 +1,45 @@
-# NgCountUpJs
+# ng-count-up-js
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.0.
+## refer
+```
+ng-countup is a rewritten version of https://github.com/inorganik/
+```
+## Install
+```
+npm i ng-count-up-js
+```
 
-## Code scaffolding
+## app.module.ts
+```
+import { CountUpModule } from 'ng-count-up-js';
+..........
+@NgModule({
+..........
+  imports: [
+    CountUpModule,
+    ..........
+  ]
+})
+```
 
-Run `ng generate component component-name --project ng-count-up-js` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ng-count-up-js`.
-> Note: Don't forget to add `--project ng-count-up-js` or else it will be added to the default project in your `angular.json` file. 
+## component.html
+```
+<div appCountUp [startVal]="startVal" [endVal]="endVal" [duration]='2'></div>
+<button (click)="startVal=endVal; endVal=300000"> 300000</button>
+<button (click)="startVal=endVal; endVal=400000"> 400000</button>
+<button (click)="startVal=endVal; endVal=500000"> 500000</button>
+<button (click)="startVal=endVal; endVal=0"> 0</button>
+</div>
 
-## Build
+```
 
-Run `ng build ng-count-up-js` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Parameters
+### Input
+- endVal: the number to count to
+- duration: Optional duration of the animation in seconds. Default is 2.
+- startVal: (Number) Optional start value for the count. Defaults to zero.
+- decimals: Optional number of decimal places. Default is 2.
 
-## Publishing
+### Output
+- complete
 
-After building your library with `ng build ng-count-up-js`, go to the dist folder `cd dist/ng-count-up-js` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test ng-count-up-js` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

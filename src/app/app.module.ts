@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 // import { MomentPipesModule } from './projects/ng-moment-pipes/src/public-api';
 import { MomentPipesModule } from 'ng-moment-pipes';
 
-// import { CountUpModule } from './projects/ng-count-up-js/src/public-api';
+
 import { CountUpModule } from 'ng-count-up-js';
 import { RestHttpClientModule } from './projects/ng-rest-http/src/public-api';
 // import { RestHttpClientModule } from 'ng-rest-http'

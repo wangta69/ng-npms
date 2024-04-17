@@ -5,9 +5,9 @@
   startVal: {{startVal}} / endVal: {{endVal}}
 
 <!-- <div appCountUp [startVal]="startVal" [endVal]="endVal" [duration]='0.1'></div> -->
-<div appCountUp [endVal]="endVal" [duration]='0.1'></div>
-<button (click)="startVal=endVal; endVal=3000"> 3000</button>
-<button (click)="startVal=endVal; endVal=4000"> 4000</button>
-<button (click)="startVal=endVal; endVal=5000"> 5000</button>
+<div appCountUp [startVal]="startVal" [endVal]="endVal" [duration]='2'></div>
+<button (click)="startVal=endVal; endVal=300000"> 300000</button>
+<button (click)="startVal=endVal; endVal=400000"> 400000</button>
+<button (click)="startVal=endVal; endVal=500000"> 500000</button>
 <button (click)="startVal=endVal; endVal=0"> 0</button>
 </div>
