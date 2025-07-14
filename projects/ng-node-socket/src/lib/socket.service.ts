@@ -3,18 +3,20 @@ import { Observable } from 'rxjs';
 import io from 'socket.io-client';
 
 @Injectable({
-providedIn: 'root'
+  providedIn: 'root'  // 또는 'any', 'platform'
 })
 export class SocketService {
   private url = 'http://xxx.xxx.xxx.xxx:portNumber';
   private Socket: any;
 
   private onSubscribes: any = {}; //
-  private Rooms: string[] = [];
+  private Rooms:string[] = [];
 
-  public init(url: string, option?: any): void {
+  constructor() {}
+
+  public init(url: string): void {
     this.url = url;
-    this.Socket = io(this.url, option);
+    this.Socket = io(this.url);
   }
 
   /**
@@ -29,55 +31,54 @@ export class SocketService {
     this.onSubscribes[group][key] = observable;
   }
 
-  public of(namespace: string): void {
-    this.Socket.of(namespace);
-  }
-
-  public once(eventName: string, callback: (body: any) => void): void {
-    this.Socket.once(eventName, callback);
-  }
-
-  public connect(): void {
-    return this.Socket.connect();
-  }
-
-  public socket(): any {
+  get socket(): any {
     return this.Socket;
   }
 
   public Emit(...args: any[]): void {
-    if (args.length === 2) {
-      this.Socket.emit(args[0], args[1]);
-    } else if (args.length === 3) {
-      this.Socket.emit(args[0], args[1], args[2]);
-    } else {
-      this.Socket.emit(args[0], args[1], args[2], args[3]);
-    }
+    this.Socket.emit(...args);
+
+    // if (args.length === 2) {
+    //   this.Socket.emit(args[0], args[1]);
+    // } else if (args.length === 3) {
+    //   this.Socket.emit(args[0], args[1], args[2]);
+    // } else {
+    //   this.Socket.emit(args[0], args[1], args[2], args[3]);
+    // }
   }
 
+  /**
+   * @deprecated
+   * @param callback 
+   * @param args 
+   */
   public EmitCallback(callback: (body: any) => void, ...args: any[]): void {
-    if (args.length === 1) {
-      this.Socket.emit(args[0], (obj: any) => {
-        callback(obj);
-      });
-    } else if (args.length === 2) {
-      this.Socket.emit(args[0], args[1], (obj: any) => {
-        callback(obj);
-      });
-    } else if (args.length === 3) {
-      this.Socket.emit(args[0], args[1], args[2], (obj: any) =>  {
-        callback(obj);
-      });
-    } else {
-      this.Socket.emit(args[0], args[1], args[2], args[3], (obj: any) => {
-        callback(obj);
-      });
-    }
+    this.Socket.emit(...args, (obj: any) => {
+      callback(obj);
+    });
+
+    // if (args.length === 1) {
+    //   this.Socket.emit(args[0], (obj: any) => {
+    //     callback(obj);
+    //   });
+    // } else if (args.length === 2) {
+    //   this.Socket.emit(args[0], args[1], (obj: any) => {
+    //     callback(obj);
+    //   });
+    // } else if (args.length === 3) {
+    //   this.Socket.emit(args[0], args[1], args[2], (obj: any) =>  {
+    //     callback(obj);
+    //   });
+    // } else {
+    //   this.Socket.emit(args[0], args[1], args[2], args[3], (obj: any) => {
+    //     callback(obj);
+    //   });
+    // }
   }
 
   public removeAllListener(eventName: string): void {
     this.Socket.removeAllListeners(eventName, () => {
-        // const args = arguments;
+      // const args = arguments;
     });
   }
 
@@ -105,28 +106,24 @@ export class SocketService {
 
   public On(key: string): any { // 두개의 인자값을 받아서 하나의 object로 결합하워 callback
     const observable = new Observable((observer) => {
-      this.Socket.on(key, (...arg: any[]) => {
-        if (arg.length < 2) {
-            observer.next(arg[0]);
-          } else {
-            observer.next(arg);
-          }
-      });
-      return () => { // unsubscribe 시 socket자체가 disconnect되는 것을 방지하기 위해 아래는 주석 처리한다.
-          // this.Socket.disconnect();
-      };
+        this.Socket.on(key, (...arg: any[]) => {
+          observer.next(...arg);
+        });
+        return () => { // unsubscribe 시 socket자체가 disconnect되는 것을 방지하기 위해 아래는 주석 처리한다.
+            // this.Socket.disconnect();
+        };
     });
     return observable;
   }
 
   public receive(grp: string, key: string): any { // 두개의 인자값을 받아서 하나의 object로 결합하워 callback
     const observable = new Observable((observer) => {
-      this.Socket.on(key, (...arg: any[]) => {
-        observer.next(arg);
-      });
-      return () => { // unsubscribe 시 socket자체가 disconnect되는 것을 방지하기 위해 아래는 주석 처리한다.
-          // this.Socket.disconnect();
-      };
+        this.Socket.on(key, (...arg: any[]) => {
+          observer.next(arg);
+        });
+        return () => { // unsubscribe 시 socket자체가 disconnect되는 것을 방지하기 위해 아래는 주석 처리한다.
+            // this.Socket.disconnect();
+        };
     });
     this.setOnSubscribes (grp, key, observable);
     return observable;

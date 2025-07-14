@@ -1,24 +1,71 @@
-# NgNodeSocket
+# ng-node-socket
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.0.
+Tested for angular5
 
-## Code scaffolding
+## Installation
+```
+npm i ng-node-socket
+npm i socket.io-client
+```
 
-Run `ng generate component component-name --project ng-node-socket` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ng-node-socket`.
-> Note: Don't forget to add `--project ng-node-socket` or else it will be added to the default project in your `angular.json` file. 
+## How to use
+### single socket connection
+-- app.module.ts
+```
+import { SocketService } from 'ng-node-socket';
+@NgModule({
+  providers: [  SocketService ]
+})
 
-## Build
+```
+-- app.componet.ts
+```
+import { SocketService } from 'ng-node-socket';
 
-Run `ng build ng-node-socket` to build the project. The build artifacts will be stored in the `dist/` directory.
+export class AComponent {
+    constructor(protected socket:SocketService) {
+        socket.init('http://xxx.xxx.xxx.xxx:yy');
 
-## Publishing
+        this.socket.On('connection').subscribe(obj => {
+           console.log(obj);
+        });
 
-After building your library with `ng build ng-node-socket`, go to the dist folder `cd dist/ng-node-socket` and run `npm publish`.
+        this.socket.Emit('someThing1');
+        this.socket.Emit('someThing1', arg1, ....);
+        this.socket.EmitCallback(function(data){console.log(data)}, 'someThing1');
+        this.socket.On('someThing2').subscribe(obj => {
+            console.log(obj);
+		});
+    }
+}
+```
 
-## Running unit tests
+### multi socket connection
+-- app.module.ts
+```
+import { SocketService } from 'ng-node-socket';
+@NgModule({
+  providers: [  SocketService ]
+})
 
-Run `ng test ng-node-socket` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+-- app.componet.ts
+```
+import { SocketMultiService } from 'ng-node-socket';
 
-## Further help
+export class AComponent {
+    constructor(protected socket:SocketMultiService) {
+        socket.init('name1', 'http://xxx.xxx.xxx.xxx:port1');
+        socket.init('name2', 'http://xxx.xxx.xxx.xxx:port2');
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+        this.socket.On('name1', 'connection').subscribe(obj => {
+           console.log(obj);
+        });
+
+        this.socket.Emit('name1','someThing1');
+        this.socket.Emit('name2','someThing1', arg1, ....);
+    }
+}
+```
+
+##### if you got an error 'global is not defined' please put '(window as any).global = window;' to your polyfills.ts or elsewhere what you want
